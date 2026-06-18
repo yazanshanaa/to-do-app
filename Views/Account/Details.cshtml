@@ -1,0 +1,7 @@
+@model TodoApp.Models.User
+@{ ViewData["Title"] = "My Details"; }
+<h2>My Details</h2>
+<table class="table" style="max-width:400px;">
+    <tr><th>User ID</th><td>@Model.UserId</td></tr>
+    <tr><th>Username</th><td>@Model.Username</td></tr>
+</table>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - To-Do App</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Tasks" asp-action="Index">To-Do App</a>
+            <ul class="navbar-nav">
+                @* show menu based on session state (Chapter 9) *@
+                @if (Context.Session.GetString("Username") != null)
+                {
+                    <li class="nav-item"><a class="nav-link" asp-controller="Tasks" asp-action="Index">My Tasks</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Details">My Details</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Logout">Logout (@Context.Session.GetString("Username"))</a></li>
+                }
+                else
+                {
+                    <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="SignIn">Sign In</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="SignUp">Sign Up</a></li>
+                }
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
